@@ -1,8 +1,34 @@
-{-# LANGUAGE FlexibleInstances
-           , MultiParamTypeClasses
-           , UndecidableInstances
-           , GeneralizedNewtypeDeriving
-  #-}
+{-# LANGUAGE MultiParamTypeClasses, FlexibleInstances, UndecidableInstances, GeneralizedNewtypeDeriving #-}
+
+{- |
+
+Module      :  System.Console.Haskeline.Class
+Copyright   :  (c) Antoine Latter, 2009
+License     :  BSD3
+Maintainer  :  Antoine Latter <aslatter@gmail.com>
+Stability   :  experimental
+Portability :  FlexibleInstances, MultiPatamTypeClasses, UndecidableInstances, GeneralizedNewtypeDeriving
+
+Haskeline provides all of its functionality within the scope of a monad transformer.
+This module adds two pieces to this:
+
+-- Introduced here is a type-class which defines the operations
+   supported by the Haskeline monad transformer - MonadHaskeline
+
+-- Also is a newtype wrapper around Haskeline's InputT, called
+   HaskelineT. Sadly, InputT defines ints own instance of the
+   mtl MonadState, which is no good for folks wanting to use
+   InputT in an existing monad transformer stack.
+
+   HaskelineT also has an instance of MonadState, but it merely
+   lifts the functions further in the transformer stack.
+
+Large portions of the Haskeline functionality are re-exported
+here for convinience.
+
+-}
+
+
 
 module System.Console.Haskeline.Class
     (HaskelineT
