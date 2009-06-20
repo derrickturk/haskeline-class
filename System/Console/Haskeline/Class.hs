@@ -12,10 +12,10 @@ Portability :  FlexibleInstances, MultiPatamTypeClasses, UndecidableInstances, G
 Haskeline provides all of its functionality within the scope of a monad transformer.
 This module adds two pieces to this:
 
--- Introduced here is a type-class which defines the operations
+- Introduced here is a type-class which defines the operations
    supported by the Haskeline monad transformer - MonadHaskeline
 
--- Also is a newtype wrapper around Haskeline's InputT, called
+- A newtype wrapper around Haskeline's InputT, called
    HaskelineT. Sadly, InputT defines ints own instance of the
    mtl MonadState, which is no good for folks wanting to use
    InputT in an existing monad transformer stack.
@@ -57,6 +57,8 @@ import Control.Monad.State
 newtype HaskelineT m a = HaskelineT {unHaskeline :: H.InputT m a}
  deriving (Monad, Functor, Applicative, MonadIO, MonadException, MonadTrans, MonadHaskeline)
 
+-- | Run a line-reading application, reading user 'Prefs' from 
+-- @~/.haskeline@
 runHaskelineT :: MonadException m => H.Settings m -> HaskelineT m a -> m a
 runHaskelineT s m = H.runInputT s (unHaskeline m)
 
