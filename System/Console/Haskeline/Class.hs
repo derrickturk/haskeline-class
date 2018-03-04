@@ -52,7 +52,7 @@ import System.Console.Haskeline.Completion
 import System.Console.Haskeline.MonadException
 
 import Control.Applicative
-import Control.Monad.State
+import Control.Monad.State.Strict
 
 newtype HaskelineT m a = HaskelineT {unHaskeline :: H.InputT m a}
  deriving (Monad, Functor, Applicative, MonadIO, MonadException, MonadTrans, MonadHaskeline)
